@@ -1,0 +1,6 @@
+venv/
+chroma_db/
+chroma_db.fingerprint
+__pycache__/
+docs/*.pdf
+ 
