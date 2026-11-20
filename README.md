@@ -27,7 +27,7 @@ page it used.
    ```
 2. Download the models:
    ```powershell
-   ollama pull llama3.2
+   ollama pull llama3.1:8b
    ollama pull mxbai-embed-large
    ```
 3. Create and activate a virtual environment (do this in every new copy of the
@@ -80,7 +80,7 @@ At the top of `main.py`:
 
 | Setting | Meaning | Default |
 |---|---|---|
-| `MODEL_NAME` | Ollama chat model | `llama3.2` (try `llama3.1:8b` for better answers) |
+| `MODEL_NAME` | Ollama chat model | `llamallama3.1:8b` |
 
 Changing `MODEL_NAME` or `TOP_K` does not require a rebuild.
 
