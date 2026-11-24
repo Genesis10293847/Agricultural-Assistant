@@ -13,7 +13,7 @@ from collections import Counter
 import streamlit as st
 import streamlit.components.v1 as components
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_ollama.llms import OllamaLLM
+# from langchain_ollama.llms import OllamaLLM
 
 st.set_page_config(
     page_title="Agri Assistant",
@@ -50,8 +50,14 @@ CSS = """
 html, body, .stApp, [class*="css"]{ font-family: Roboto, Arial, Helvetica, sans-serif; color:var(--ink); }
 .stApp { background: var(--background-color); }
 [data-testid="stChatMessage"] { background: var(--secondary-background-color); }   
-footer, [data-testid="stDeployButton"]{ display:none !important; }
-[data-testid="stHeader"]{ background:#ffffff; border-bottom:1px solid var(--line); }
+footer, [data-testid="stDeployButton"], [data-testid="stMainMenu"]{ display:none !important; }
+[data-testid="stHeader"]{
+  height:0 !important; min-height:0 !important; padding:0 !important;
+  border:0 !important; background:transparent !important; overflow:visible !important;
+}
+[data-testid="stExpandSidebarButton"]{
+  position:fixed !important; top:.5rem; left:.5rem; z-index:1001;
+}
 .block-container{ padding-top:0.5rem; padding-bottom:2rem; max-width:none; }
 a{ color:var(--link); }
 .sticky-intro{
@@ -132,6 +138,9 @@ body:has([data-testid="stSidebar"][data-collapsed="false"]) .sticky-intro{
   .bot-thinking::before{ animation:none; content:"🌾"; }
 }
 
+/* start */
+
+
 /* buttons */
 div.stButton > button{ width:100%; background:#fff; color:var(--link); border:1px solid #cbd5e1;
   border-radius:4px; justify-content:flex-start; text-align:left; }
@@ -147,8 +156,6 @@ div.stButton > button:hover p{ color:#fff !important; }
 """
 
 HEADER = """
-<div class="utility"><span>A student project inspired by the DA-CAR website</span>
-<span>Runs locally with Ollama. Nothing leaves this computer.</span></div>
 <div class="masthead"><div class="mast-inner">
   <div class="mark">🌾</div>
   <div>
