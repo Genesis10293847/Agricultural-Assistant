@@ -11,6 +11,7 @@ import html
 from collections import Counter
 
 import streamlit as st
+import streamlit.components.v1 as components
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_ollama.llms import OllamaLLM
 
@@ -274,6 +275,29 @@ with st.sidebar:
         st.rerun()
 
 prompt = st.chat_input("Ask a question about the documents...")
+components.html(
+    """
+    <script>
+    const host = window.parent;
+    if (!host.__agriChatBlankClickInstalled) {
+      host.__agriChatBlankClickInstalled = true;
+      host.document.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof host.Element)) return;
+        if (!target.closest('[data-testid="stMain"]')) return;
+        if (target.closest(
+          'button, a, input, textarea, select, [role="button"], ' +
+          '[data-testid="stChatInput"], [data-testid="stChatMessage"], ' +
+          '[data-testid="stExpander"]'
+        )) return;
+        host.document.querySelector('[data-testid="stChatInputTextArea"]')?.focus();
+      }, true);
+    }
+    </script>
+    """,
+    height=0,
+    scrolling=False,
+)
 question = prompt
 st.markdown(
     f'<div class="sticky-intro">{HEADER}</div>',
